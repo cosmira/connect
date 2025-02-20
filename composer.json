@@ -1,0 +1,45 @@
+{
+    "name": "esplora/lumos",
+    "description": "PHP library for unlock contents from various files with ease.",
+    "type": "library",
+    "keywords": ["decompression", "archives", "extracting"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandr Chernyaev",
+            "email": "bliz48rus@gmail.com",
+            "homepage": "https://tabuna.github.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0",
+        "illuminate/pipeline": "^11.0",
+        "zbateson/mail-mime-parser": "^3.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.17",
+        "phpunit/phpunit": "^11.5",
+        "symfony/var-dumper": "^7.1",
+        "vlucas/phpdotenv": "^5.4.1"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "Esplora\\Lumos\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Esplora\\Lumos\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
