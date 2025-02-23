@@ -3,7 +3,6 @@
 namespace Esplora\Lumos\Actions;
 
 use Esplora\Lumos\Connections\Session;
-use Esplora\Lumos\SmtpSession;
 use Esplora\Lumos\Status;
 use Illuminate\Support\Str;
 

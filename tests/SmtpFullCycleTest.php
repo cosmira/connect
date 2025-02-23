@@ -19,7 +19,7 @@ class SmtpFullCycleTest extends TestCase
 {
     public function test_smtp_full_cycle()
     {
-        $session = new LocalSession();
+        $session = new LocalSession;
 
         // 1️⃣ HELO
         $heloHandler = new Helo;
