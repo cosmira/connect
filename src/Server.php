@@ -8,6 +8,7 @@ use Esplora\Lumos\Actions\Mail;
 use Esplora\Lumos\Actions\Message;
 use Esplora\Lumos\Actions\Quit;
 use Esplora\Lumos\Actions\Rcpt;
+use Esplora\Lumos\Connections\Session;
 use Illuminate\Support\Str;
 
 class Server
@@ -27,9 +28,9 @@ class Server
     ];
 
     /**
-     * @param \Esplora\Lumos\SmtpSession $session
+     * @param \Esplora\Lumos\Connections\Session $session
      */
-    public function __construct(protected SmtpSession $session) {}
+    public function __construct(protected Session $session) {}
 
     /**
      * Обработка команды.
@@ -40,22 +41,59 @@ class Server
      */
     public function handle(string $request): string
     {
-        // Разбиваем запрос на команду и аргументы
-        $command = Str::of($request)->before(' ')->upper();
-        $arg = Str::of($request)->after(' ')->trim();
+        [$command, $arg] = $this->parseRequest($request);
 
         // Проверяем наличие команды в списке допустимых
-        if (! isset($this->commands[strtoupper($command)])) {
-            return '500 Command not recognized';
+        if (! $this->isValidCommand($command)) {
+            $error = Status::COMMAND_UNRECOGNIZED->response();
+
+            $this->session->write($error);
+
+            return $error;
         }
 
         // Получаем класс обработчика для команды
         $handlerClass = $this->commands[strtoupper($command)];
 
-        // Создаем экземпляр обработчика и передаем команду и аргументы
+        // Создаем экземпляр обработчика. TODO: Разрешаем обработчик через контейнер
         $handler = new $handlerClass;
 
-        // Выполняем обработку команды и возвращаем результат
-        return $handler->handle($this->session, $arg);
+        // Обрабатываем команду и получаем ответ
+        $response = $handler->handle($this->session, $arg);
+
+        $this->session->write($response);
+
+        return $response;
+    }
+
+    /**
+     * Проверка на допустимость команды.
+     *
+     * @param string $command
+     *
+     * @return bool
+     */
+    protected function isValidCommand(string $command): bool
+    {
+        return isset($this->commands[$command]);
+    }
+
+    /**
+     * @param string $request
+     *
+     * @return string[]
+     */
+    protected function parseRequest(string $request): array
+    {
+        // Если ожидается передача данных, считаем запрос как аргумент для MESSAGE
+        if ($this->session->isAwaitingData()) {
+            return ['MESSAGE', $request];
+        }
+
+        // Парсим команду и аргумент
+        return [
+            Str::of($request)->before(' ')->trim()->upper()->toString(),
+            Str::of($request)->after(' ')->trim()->toString(),
+        ];
     }
 }

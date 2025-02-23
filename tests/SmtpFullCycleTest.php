@@ -8,7 +8,7 @@ use Esplora\Lumos\Actions\Mail;
 use Esplora\Lumos\Actions\Message;
 use Esplora\Lumos\Actions\Quit;
 use Esplora\Lumos\Actions\Rcpt;
-use Esplora\Lumos\SmtpSession;
+use Esplora\Lumos\Connections\LocalSession;
 use Esplora\Lumos\Status;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +19,7 @@ class SmtpFullCycleTest extends TestCase
 {
     public function test_smtp_full_cycle()
     {
-        $session = new SmtpSession;
+        $session = new LocalSession();
 
         // 1️⃣ HELO
         $heloHandler = new Helo;
@@ -49,10 +49,10 @@ class SmtpFullCycleTest extends TestCase
         $messageHandler = new Message;
         $messageHandler->handle($session, 'Hello, world!');
         $messageHandler->handle($session, 'This is a test.');
-        $response = $messageHandler->handle($session, '.'); // Завершаем сообщение
+        $response = $messageHandler->handle($session, ".\r\n"); // Завершаем сообщение
 
         $this->assertEquals(Status::SUCCESS->response('Message received'), $response);
-        $this->assertEquals("Hello, world!\nThis is a test.", $session->getMessage());
+        $this->assertEquals("Hello, world!\r\nThis is a test.\r\n", $session->getMessage());
 
         // 6️⃣ QUIT (закрываем соединение)
         $quitHandler = new Quit;

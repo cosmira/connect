@@ -3,7 +3,7 @@
 namespace Esplora\Lumos\Tests;
 
 use Esplora\Lumos\Server;
-use Esplora\Lumos\SmtpSession;
+use Esplora\Lumos\Connections\LocalSession;
 use Esplora\Lumos\Status;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class SmtpServerTest extends TestCase
     public function test_smtp_server():void
     {
         // Создаем сессию и сервер
-        $session = new SmtpSession;
+        $session = new LocalSession;
         $server = new Server($session);
 
         // Проверка команды HELO
@@ -34,6 +34,9 @@ class SmtpServerTest extends TestCase
         $response = $server->handle('DATA');
         $this->assertEquals('354 Start mail input; end with <CRLF>.<CRLF>', $response);
 
+        // Останавливаем прием данных
+        $server->handle(".\r\n");
+
         // Проверка команды QUIT
         $response = $server->handle('QUIT');
         $this->assertEquals('221 Bye', $response);
@@ -45,7 +48,7 @@ class SmtpServerTest extends TestCase
     public function test_smtp_server_session_state()
     {
         // Создаем сессию и сервер
-        $session = new SmtpSession;
+        $session = new LocalSession;
         $server = new Server($session);
 
         // Выполняем команды
@@ -56,6 +59,8 @@ class SmtpServerTest extends TestCase
 
         // Проверяем, что сессия ожидает данные
         $this->assertTrue($session->isAwaitingData());
+
+        $session->setAwaitingData(false);
 
         // Завершаем сессию
         $server->handle('QUIT');
@@ -70,7 +75,7 @@ class SmtpServerTest extends TestCase
     public function test_full_email_message()
     {
         // Создаем сессию и сервер
-        $session = new SmtpSession();
+        $session = new LocalSession();
         $server = new Server($session);
 
         // 1. Представление клиента (HELO)
@@ -95,19 +100,15 @@ class SmtpServerTest extends TestCase
 
         // 5. Отправляем тело письма через команду MESSAGE.
         // Предполагаем, что каждый вызов MESSAGE добавляет строку к телу письма.
-        $response = $server->handle('MESSAGE Subject: Test Email');
-        $this->assertEquals("250 OK", $response);
-
-        // Пустая строка между заголовком и телом
-        $response = $server->handle('MESSAGE ');
+        $response = $server->handle('Subject: Test Email');
         $this->assertEquals("250 OK", $response);
 
         // Тело письма
-        $response = $server->handle('MESSAGE This is the body of the email.');
+        $response = $server->handle('This is the body of the email.');
         $this->assertEquals("250 OK", $response);
 
         // Завершаем ввод письма точкой
-        $response = $server->handle('MESSAGE .');
+        $response = $server->handle(".\r\n");
         $this->assertEquals(Status::SUCCESS->response('Message received'), $response);
         $this->assertFalse($session->isAwaitingData());
 
@@ -117,7 +118,7 @@ class SmtpServerTest extends TestCase
         $this->assertTrue($session->isClosed());
 
         // 7. Проверяем, что сообщение корректно сохранено в сессии.
-        $expectedMessage = "Subject: Test Email\n\nThis is the body of the email.";
+        $expectedMessage = "Subject: Test Email\r\nThis is the body of the email.\r\n";
         $this->assertEquals($expectedMessage, $session->getMessage());
     }
 }

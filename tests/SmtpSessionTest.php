@@ -2,14 +2,14 @@
 
 namespace Esplora\Lumos\Tests;
 
-use Esplora\Lumos\SmtpSession;
+use Esplora\Lumos\Connections\LocalSession;
 use PHPUnit\Framework\TestCase;
 
 class SmtpSessionTest extends TestCase
 {
     public function test_can_store_client_hostname()
     {
-        $session = new SmtpSession;
+        $session = new LocalSession;
         $session->setClientHostname('example.com');
 
         $this->assertEquals('example.com', $session->getClientHostname());
@@ -17,7 +17,7 @@ class SmtpSessionTest extends TestCase
 
     public function test_can_store_sender_and_recipients()
     {
-        $session = new SmtpSession;
+        $session = new LocalSession;
         $session->setSender('sender@example.com');
         $session->addRecipient('recipient@example.com');
 
@@ -27,10 +27,10 @@ class SmtpSessionTest extends TestCase
 
     public function test_can_store_message_lines()
     {
-        $session = new SmtpSession;
+        $session = new LocalSession;
         $session->addMessageLine('Hello');
         $session->addMessageLine('World');
 
-        $this->assertEquals("Hello\nWorld", $session->getMessage());
+        $this->assertEquals("Hello\r\nWorld", $session->getMessage());
     }
 }

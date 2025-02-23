@@ -2,6 +2,7 @@
 
 namespace Esplora\Lumos\Actions;
 
+use Esplora\Lumos\Connections\Session;
 use Esplora\Lumos\SmtpSession;
 use Esplora\Lumos\Status;
 
@@ -11,7 +12,7 @@ use Esplora\Lumos\Status;
  */
 class Quit
 {
-    public function handle(SmtpSession $session): string
+    public function handle(Session $session): string
     {
         $session->close();
 

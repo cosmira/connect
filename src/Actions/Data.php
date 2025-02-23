@@ -2,7 +2,7 @@
 
 namespace Esplora\Lumos\Actions;
 
-use Esplora\Lumos\SmtpSession;
+use Esplora\Lumos\Connections\Session;
 use Esplora\Lumos\Status;
 
 /**
@@ -11,15 +11,8 @@ use Esplora\Lumos\Status;
  */
 class Data
 {
-    public function handle(SmtpSession $session, string $argument): string
+    public function handle(Session $session, string $argument): string
     {
-        /*
-        if (! empty($argument)) {
-            return Status::START_MAIL_INPUT->response();
-            //  return Status::PARAMETERS_ERROR->response('DATA');
-        }
-        */
-
         $session->setAwaitingData(true);
 
         return Status::START_MAIL_INPUT->response();

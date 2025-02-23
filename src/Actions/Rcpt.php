@@ -2,6 +2,7 @@
 
 namespace Esplora\Lumos\Actions;
 
+use Esplora\Lumos\Connections\Session;
 use Esplora\Lumos\SmtpSession;
 use Esplora\Lumos\Status;
 use Illuminate\Support\Str;
@@ -12,7 +13,7 @@ use Illuminate\Support\Str;
  */
 class Rcpt
 {
-    public function handle(SmtpSession $session, string $argument): string
+    public function handle(Session $session, string $argument): string
     {
         $email = Str::of($argument)->between('<', '>')->toString();
 
