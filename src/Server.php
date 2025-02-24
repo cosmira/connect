@@ -1,6 +1,6 @@
 <?php
 
-namespace Esplora\Lumos;
+namespace Cosmira\Connect\;
 
 use Cosmira\Connect\Actions\Data;
 use Cosmira\Connect\Actions\Helo;

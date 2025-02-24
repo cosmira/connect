@@ -1,6 +1,6 @@
 <?php
 
-namespace Esplora\Lumos;
+namespace Cosmira\Connect\;
 
 /**
  * Перечисление (Enum) SMTP-ответов сервера
