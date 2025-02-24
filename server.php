@@ -2,8 +2,8 @@
 
 require 'vendor/autoload.php';
 
-use Esplora\Lumos\Connections\ReactSession;
-use Esplora\Lumos\Server;
+use Cosmira\Connect\Connections\ReactSession;
+use Cosmira\Connect\Server;
 use React\EventLoop\Loop;
 use React\Socket\ConnectionInterface;
 use React\Socket\SocketServer;

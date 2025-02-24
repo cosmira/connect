@@ -1,6 +1,6 @@
 <?php
 
-namespace Esplora\Lumos\Connections;
+namespace Cosmira\Connect\Connections;
 
 /**
  * Defines a session interface for handling communication between a client and a server.

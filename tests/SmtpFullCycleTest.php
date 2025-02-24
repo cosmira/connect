@@ -1,15 +1,15 @@
 <?php
 
-namespace Esplora\Lumos\Tests;
+namespace Cosmira\Connect\Tests;
 
-use Esplora\Lumos\Actions\Data;
-use Esplora\Lumos\Actions\Helo;
-use Esplora\Lumos\Actions\Mail;
-use Esplora\Lumos\Actions\Message;
-use Esplora\Lumos\Actions\Quit;
-use Esplora\Lumos\Actions\Rcpt;
-use Esplora\Lumos\Connections\LocalSession;
-use Esplora\Lumos\Status;
+use Cosmira\Connect\Actions\Data;
+use Cosmira\Connect\Actions\Helo;
+use Cosmira\Connect\Actions\Mail;
+use Cosmira\Connect\Actions\Message;
+use Cosmira\Connect\Actions\Quit;
+use Cosmira\Connect\Actions\Rcpt;
+use Cosmira\Connect\Connections\LocalSession;
+use Cosmira\Connect\Status;
 use PHPUnit\Framework\TestCase;
 
 /**

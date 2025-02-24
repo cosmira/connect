@@ -1,8 +1,8 @@
 {
-    "name": "esplora/lumos",
-    "description": "PHP library for unlock contents from various files with ease.",
+    "name": "cosmira/connect",
+    "description": "SMTP server implemented in pure PHP",
     "type": "library",
-    "keywords": ["decompression", "archives", "extracting"],
+    "keywords": ["smtp", "server", "email"],
     "license": "MIT",
     "authors": [
         {
@@ -24,19 +24,14 @@
         "phpunit/phpunit": "^11.5",
         "symfony/var-dumper": "^7.1"
     },
-    "scripts": {
-        "post-install-cmd": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ]
-    },
     "autoload": {
         "psr-4": {
-            "Esplora\\Lumos\\": "src/"
+            "Cosmira\\Connect\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Esplora\\Lumos\\Tests\\": "tests/"
+            "Cosmira\\Connect\\Tests\\": "tests/"
         }
     },
     "config": {

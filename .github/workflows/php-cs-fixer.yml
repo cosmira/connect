@@ -1,7 +1,0 @@
-name: Coding Guidelines
-
-on:
-  push:
-jobs:
-  uneditable:
-    uses: esplora/.github/.github/workflows/php-cs-fixer.yml@main

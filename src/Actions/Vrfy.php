@@ -1,8 +1,8 @@
 <?php
 
-namespace Esplora\Lumos\Actions;
+namespace Cosmira\Connect\Actions;
 
-use Esplora\Lumos\Status;
+use Cosmira\Connect\Status;
 
 /**
  * Обрабатывает команду VRFY.

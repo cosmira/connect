@@ -1,6 +1,6 @@
 <?php
 
-namespace Esplora\Lumos\Connections;
+namespace Cosmira\Connect\Connections;
 
 /**
  * Implements the Session interface for local testing purposes.

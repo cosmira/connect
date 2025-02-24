@@ -1,6 +1,6 @@
 <?php
 
-namespace Esplora\Lumos\Connections;
+namespace Cosmira\Connect\Connections;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;

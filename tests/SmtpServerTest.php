@@ -1,10 +1,10 @@
 <?php
 
-namespace Esplora\Lumos\Tests;
+namespace Cosmira\Connect\Tests;
 
-use Esplora\Lumos\Connections\LocalSession;
-use Esplora\Lumos\Server;
-use Esplora\Lumos\Status;
+use Cosmira\Connect\Connections\LocalSession;
+use Cosmira\Connect\Server;
+use Cosmira\Connect\Status;
 use PHPUnit\Framework\TestCase;
 
 class SmtpServerTest extends TestCase

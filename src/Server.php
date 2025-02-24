@@ -2,13 +2,13 @@
 
 namespace Esplora\Lumos;
 
-use Esplora\Lumos\Actions\Data;
-use Esplora\Lumos\Actions\Helo;
-use Esplora\Lumos\Actions\Mail;
-use Esplora\Lumos\Actions\Message;
-use Esplora\Lumos\Actions\Quit;
-use Esplora\Lumos\Actions\Rcpt;
-use Esplora\Lumos\Connections\Session;
+use Cosmira\Connect\Actions\Data;
+use Cosmira\Connect\Actions\Helo;
+use Cosmira\Connect\Actions\Mail;
+use Cosmira\Connect\Actions\Message;
+use Cosmira\Connect\Actions\Quit;
+use Cosmira\Connect\Actions\Rcpt;
+use Cosmira\Connect\Connections\Session;
 use Illuminate\Support\Str;
 
 class Server
@@ -28,7 +28,7 @@ class Server
     ];
 
     /**
-     * @param \Esplora\Lumos\Connections\Session $session
+     * @param \Cosmira\Connect\Connections\Session $session
      */
     public function __construct(protected Session $session) {}
 

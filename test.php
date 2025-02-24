@@ -2,7 +2,7 @@
 
 include_once 'vendor/autoload.php';
 
-$message = \Esplora\Lumos\MailParser::fromString(file_get_contents('m0015.txt'));
+$message = \Cosmira\Connect\MailParser::fromString(file_get_contents('m0015.txt'));
 
 dd(
     $message->html(),
@@ -12,7 +12,7 @@ dd(
 );
 
 // Тестирование
-$parser = new \Esplora\Lumos\EmailParser(file_get_contents('m0015.txt'));
+$parser = new \Cosmira\Connect\EmailParser(file_get_contents('m0015.txt'));
 
 echo '📩 Тема: '.($parser->headers()->get('subject') ?? 'Без темы').PHP_EOL;
 echo "📜 Тело письма:\n".$parser->body()->content().PHP_EOL;

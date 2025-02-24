@@ -1,9 +1,9 @@
 <?php
 
-namespace Esplora\Lumos\Actions;
+namespace Cosmira\Connect\Actions;
 
-use Esplora\Lumos\Connections\Session;
-use Esplora\Lumos\Status;
+use Cosmira\Connect\Connections\Session;
+use Cosmira\Connect\Status;
 
 /**
  * Обрабатывает команду HELO.

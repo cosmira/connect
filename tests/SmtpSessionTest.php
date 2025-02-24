@@ -1,8 +1,8 @@
 <?php
 
-namespace Esplora\Lumos\Tests;
+namespace Cosmira\Connect\Tests;
 
-use Esplora\Lumos\Connections\LocalSession;
+use Cosmira\Connect\Connections\LocalSession;
 use PHPUnit\Framework\TestCase;
 
 class SmtpSessionTest extends TestCase
