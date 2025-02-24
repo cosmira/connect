@@ -1,6 +1,6 @@
 <?php
 
-namespace Cosmira\Connect\;
+namespace Cosmira\Connect;
 
 use Cosmira\Connect\Actions\Data;
 use Cosmira\Connect\Actions\Helo;

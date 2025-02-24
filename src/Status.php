@@ -1,6 +1,6 @@
 <?php
 
-namespace Cosmira\Connect\;
+namespace Cosmira\Connect;
 
 /**
  * Перечисление (Enum) SMTP-ответов сервера
