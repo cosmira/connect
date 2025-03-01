@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^11.0",
+        "illuminate/support": "^11.0 || ^12.0",
         "ramsey/uuid": "^4.7",
         "react/socket": "^1.16.0",
         "zbateson/mail-mime-parser": "^3.0"
